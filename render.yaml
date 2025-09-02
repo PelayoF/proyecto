@@ -1,0 +1,21 @@
+# render.yaml
+databases:
+  - name: mi-app-db
+    databaseName: mi_app_production
+    user: mi_app_user
+
+services:
+  - type: web
+    name: mi-app-rails
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mi-app-db
+          property: connectionString
+      - key: RUBY_VERSION
+        value: 3.1.0
+      - key: RAILS_MASTER_KEY
+        sync: false

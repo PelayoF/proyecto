@@ -1,11 +1,44 @@
+# .rubocop.yml
+require:
+  - rubocop-rails
+  - rubocop-performance
+
 AllCops:
+  TargetRubyVersion: 3.1
   NewCops: enable
   Exclude:
     - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'vendor/**/*'
     - 'bin/*'
+    - 'config/boot.rb'
+    - 'config/environment.rb'
+    - 'config/puma.rb'
+    - 'node_modules/**/*'
+
+# Configuraciones específicas
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
 
 Layout/LineLength:
   Max: 120
+  Exclude:
+    - 'config/routes.rb'
 
 Metrics/MethodLength:
   Max: 15
+
+Metrics/ClassLength:
+  Max: 100
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Rails/Output:
+  Enabled: true
+
+Rails/OutputSafety:
+  Enabled: true
